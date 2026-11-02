@@ -13,7 +13,7 @@
 ## 置き場と URL
 
 - 開発中：蒲澤の GitHub の公開リポジトリ `beyond-liff` に、このフォルダの中身をそのまま置き、GitHub Pages（main ブランチ／root）で公開する
-  - URL：`https://shinobukamasawa.github.io/beyond-liff/`
+  - URL：`https://beyond-international.github.io/beyond-liff/`（2026-11-02 に組織 beyond-international へ移管。それまでは shinobukamasawa.github.io）
 - LINE Developers の LIFF アプリの「エンドポイント URL」にこの URL を設定する
 - 納品時：beyond.english.system で GitHub アカウントを作ってリポジトリを移管し、エンドポイント URL を新しい URL に差し替える
 
