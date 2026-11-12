@@ -180,16 +180,30 @@
       return;
     }
     var opts = S.linked.map(function (s) {
-      return { label: s.family + ' ' + s.given + ' さん（' + s.course + '・' + s.store + '）' + (s.id === S.current.id ? ' ✓' : ''), onclick: function () {
-        S.current = s; try { localStorage.setItem('beyond.student', s.id); } catch (e) { }
-        S.book = null;
-        if (S.page === 'mypage') return screenMypage();     // マイページ・履歴は、切り替えた生徒の分を開き直す
-        if (S.page === 'history') return screenHistory();
-        route();
-      } };
+      return { label: s.family + ' ' + s.given + ' さん（' + s.course + '・' + s.store + '）' + (s.id === S.current.id ? ' ✓' : ''), onclick: function () { switchTo(s); } };
     });
     opts.push({ label: '＋ もう1人登録する', onclick: function () { screenRegister(true); } });
     sheet('操作する生徒さんを選ぶ', opts);
+  }
+  /** 操作する生徒を切り替える（三本線の「お子さんを切り替える」と、ホームの名前の札から） */
+  function switchTo(s) {
+    S.current = s; try { localStorage.setItem('beyond.student', s.id); } catch (e) { }
+    S.book = null;
+    if (S.page === 'mypage') return screenMypage();     // マイページ・履歴は、切り替えた生徒の分を開き直す
+    if (S.page === 'history') return screenHistory();
+    if (S.page === 'home') return screenHome();
+    route();
+  }
+  /**
+   * ホームの名前の札（2026-11-12 にん）：2人以上登録しているときだけ、ホームの上に「太郎さん｜健さん」と並べる。
+   * いまの子に色、ほかの子を押すとその子のホームへ。1人だけのときは出さない。三本線の切り替えは残す（ホーム以外の画面から替えるため）
+   */
+  function kidTabs() {
+    if (!S.linked || S.linked.length <= 1) return null;
+    return h('div', { class: 'chips kids' }, S.linked.map(function (s) {
+      var on = s.id === S.current.id;
+      return h('button', { class: 'chip' + (on ? ' on' : ''), onclick: function () { if (!on) switchTo(s); } }, [s.given + 'さん']);
+    }));
   }
   /** 三本線のメニュー（ヘッダ）。ホーム以外では「ホームへ」を先頭に */
   function showMenu() {
@@ -442,6 +456,7 @@
       var s = r.student;
       S.page = 'home';
       render('ホーム', [
+        kidTabs(),
         kyukaiNote(s),
         pendingNote(),
         recentWho(r),

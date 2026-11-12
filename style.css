@@ -57,6 +57,8 @@ html, body { margin: 0; padding: 0; background: #f4f6f9; color: var(--ink); font
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
 .chip { padding: 6px 12px; border-radius: 16px; border: 1px solid #c9d1d9; background: #fff; font-size: 13px; }
 .chip.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+.chips.kids { margin: 0 0 12px; }  /* ホームの名前の札（2人以上の登録。2026-11-12） */
+.chips.kids .chip { padding: 9px 16px; font-size: 15px; font-weight: 700; }
 
 .cal-nav { display: flex; justify-content: space-between; align-items: center; margin: 6px 0; font-weight: 700; }
 .cal-nav button { background: none; border: none; font-size: 20px; color: var(--blue); padding: 4px 12px; }
