@@ -892,6 +892,8 @@
 
     var body = [
       h('button', { class: 'btn ghost', style: 'text-align:left;padding:4px 0', onclick: drawTeachers }, ['← 先生を選び直す']),
+      // 振替のときは、動かす元の予約をここにも出す（2026-11-12 にん。先生を選ぶ画面と同じ文）
+      B.mode === '振替' ? msg('振替：' + dispDate(B.original.date) + ' ' + hm(B.original.start) + ' ' + B.original.teacherName + '先生 の予約を別の日時に動かします', 'info') : null,
       h('div', { class: 'row between', style: 'flex-wrap:wrap' }, [h('div', { style: 'white-space:nowrap' }, ['行ける日を', h('b', {}, ['1つ']), '選んでください']), countLabel(B.month, r.limit)]),
       r.blocked ? msg(r.blocked, 'warn') : null,
       (B.autoNext && B.month === B.months[1] && !r.blocked) ? msg(dispMonth(B.months[0]) + '分の回数はすべてご予約済みのため、' + dispMonth(B.month) + 'を表示しています。', 'info') : null,
