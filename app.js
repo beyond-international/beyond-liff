@@ -185,7 +185,7 @@
     opts.push({ label: '＋ もう1人登録する', onclick: function () { screenRegister(true); } });
     sheet('操作する生徒さんを選ぶ', opts);
   }
-  /** 操作する生徒を切り替える（三本線の「お子さんを切り替える」と、ホームの名前の札から） */
+  /** 操作する生徒を切り替える（三本線の「お子さんの切り替え・追加」と、ホームの名前の札から） */
   function switchTo(s) {
     S.current = s; try { localStorage.setItem('beyond.student', s.id); } catch (e) { }
     S.book = null;
@@ -211,7 +211,7 @@
     if (S.page !== 'home') opts.push({ label: '⌂ ホームへ', onclick: goHome });
     opts.push({ label: 'これまでのレッスン', onclick: screenHistory });
     opts.push({ label: 'マイページ', onclick: screenMypage });
-    if (S.linked.length > 1) opts.push({ label: 'お子さんを切り替える（いま：' + given() + 'さん）', onclick: showSwitcher });
+    if (S.linked.length > 1) opts.push({ label: 'お子さんの切り替え・追加（いま：' + given() + 'さん）', onclick: showSwitcher });   // 2026-11-13 社長確認：追加もできることを文言に
     else opts.push({ label: '＋ もう1人登録する（ご兄弟で同じ LINE をお使いの場合）', onclick: function () { screenRegister(true); } });
     sheet('メニュー', opts);
   }
